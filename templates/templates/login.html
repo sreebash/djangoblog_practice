@@ -1,0 +1,40 @@
+{% extends 'templates/master.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please login to your account</h3>
+                        <div class="panel-body">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" name="username" class="form-control" id="username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" class="form-control" id="password">
+                                </div>
+                                <button type="submit" class="btn btn-default">Login</button>
+                                <br>
+                                Are you new here?
+                                <a href="{% url 'register' %}">Register Now</a>
+                            </form>
+                        </div>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

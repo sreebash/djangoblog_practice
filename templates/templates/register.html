@@ -1,0 +1,28 @@
+{% extends 'templates/master.html' %}
+
+{% block title %}
+    Please register for a new account
+{% endblock %}
+
+{% block content %}
+
+    <style>
+
+
+        .container {
+            width: 600px;
+        }
+
+        }
+    </style>
+    <div class="container">
+
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+            <button class="btn btn-info">Register</button>
+        </form>
+
+    </div>
+{% endblock %}

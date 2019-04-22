@@ -1,0 +1,13 @@
+{% extends 'templates/master.html' %}
+
+
+{% block content %}
+
+    {% autoescape off %}
+        Hi {{ user.username }},
+        Thanks for your registration to our Blog System.
+        Please click on the link below to confirm your registration,
+        http://{{ domain }} {% url 'activate' uid=uid token=token %}
+    {% endautoescape %}
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'templates/master.html' %}
+
+{% block title %}
+    All topics
+{% endblock %}
+
+{% block content %}
+
+    <style>
+        .alert {
+            height: 50px;
+            margin-top: 200px;
+        }
+    </style>
+
+    <div class="container-fluid">
+        <div class="container">
+
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_staff or request.user.is_superuser %}
+                    <a class="btn btn-info pull pull-right" href="{% url 'new_topic' %}">Add a New Topic</a>
+
+                {% endif %}
+
+            {% endif %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Topics</td>
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_staff or request.user.is_superuser %}
+                            <td>Action</td>
+                        {% endif %}
+
+                    {% endif %}
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for topic in topics %}
+                    <tr>
+                        <td><a href="{% url 'topic' name=topic.name %}">{{ topic.name }}</a></td>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_staff or request.user.is_superuser %}
+
+                                <td>
+                                    <a class="btn btn-info" href="#"> Edit </a>
+                                    <a class="btn btn-danger" href="#"> Delete </a>
+                                </td>
+                            {% endif %}
+
+                        {% endif %}
+
+
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+
+{% endblock %}
